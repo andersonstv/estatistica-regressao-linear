@@ -1,0 +1,1801 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{3}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Análise de Correlação e Regressão Linear Simples},
+  pdfauthor={Anderson dos Santos Silva; José Alves de Figueiredo Neto},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Análise de Correlação e Regressão Linear Simples}
+\author{Anderson dos Santos Silva \and José Alves de Figueiredo Neto}
+\date{}
+
+\begin{document}
+\maketitle
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, frame hidden, enhanced, sharp corners, boxrule=0pt, breakable, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
+
+\renewcommand*\contentsname{Sumário}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\hypertarget{introduuxe7uxe3o}{%
+\section{Introdução}\label{introduuxe7uxe3o}}
+
+O Conjunto de Dados de Saude e Desenvolvimento da Criança foi projetado
+para avaliar fatores relacionados ao baixo peso ao nascer em crianças. O
+conjunto de dados do software Stata chdsmetric.dta contém as seguintes
+variáveis:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  bwtkg (birth weight, in kg) / (peso ao nascer, em kg)
+\item
+  blengthcm (birth length, in cm) / (comprimento ao nascer, em cm)
+\item
+  bheadcircm (birth head circumference, in cm) / (perímetro cefálico de
+  nascimento, em cm)
+\item
+  gestwks (gestational age, in weeks) / (idade gestacional, em semanas)
+\item
+  mageyrs (mother's age, in years) / (idade da mãe , em anos)
+\item
+  mheightcm (mother's height, in cm) / (altura da mãe, em cm)
+\item
+  mweightkg (mother's prepregnancy weight, in kg) / (peso
+  pré-gestacional da mãe, em kg)
+\item
+  mcig (mother's number of cigarettes smoked per day) (número de
+  cigarros fumados pela mãe por dia)
+\item
+  fageyrs (father's age, in years) / (idade do pai, em anos )
+\item
+  fheightcm (father's height, in cm) / (altura do pai, em cm)
+\item
+  fedyrs (father's education, in years) / (educação do pai, em anos)
+\item
+  fcig (father's number of cigarettes smoked per day) / (número de
+  cigarros fumados por dia do pai)
+\item
+  lowbwt (binary outcome, = 1 for \(\le\) 2.75 kg, = 0 for
+  \textgreater{} 2.75 kg) / (desfecho binário, = 1 para \(\le\) 2,75 kg,
+  = 0 para \textgreater{} 2,75 kg).
+\end{enumerate}
+
+Neste estudo, iremos realizar uma Análise Exploratória dos Dados,
+realizando análises descritivas e gráficas, buscando entender as
+relações entre as variáveis, analisando correlações e associações entre
+elas. Em seguida, iremos realizar uma Análise de Regressão Linear
+Simples. O foco desse estudo será analisar a relação das variáveis Idade
+da Mãe (mageyrs), Idade Gestacional (gestwks), Altura da Mãe (mheightcm)
+com a variável Peso Ao Nascer (bwtkg).
+
+\hypertarget{carregando-pacotes}{%
+\subsection{Carregando pacotes}\label{carregando-pacotes}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Passo 1: Carregar os pacotes que serao usados}
+
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(pacman)) }\FunctionTok{install.packages}\NormalTok{(}\StringTok{"pacman"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Carregando pacotes exigidos: pacman
+\end{verbatim}
+
+\begin{verbatim}
+Warning: package 'pacman' was built under R version 4.2.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pacman}\SpecialCharTok{::}\FunctionTok{p\_load}\NormalTok{(readxl, dplyr, ggplot2, car, rstatix, lmtest, ggpubr, skimr, corrplot, haven)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{leitura-dos-dados}{%
+\subsection{Leitura dos Dados}\label{leitura-dos-dados}}
+
+\hypertarget{carregando-os-dados}{%
+\subsubsection{Carregando os Dados}\label{carregando-os-dados}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados\_all }\OtherTok{\textless{}{-}} \FunctionTok{read\_dta}\NormalTok{(}\StringTok{"chdsmetric.dta"}\NormalTok{)}
+\FunctionTok{glimpse}\NormalTok{(dados\_all)        }\CommentTok{\# Visualizacao de um resumo dos dados}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Rows: 680
+Columns: 13
+$ bwtkg      <dbl> 3.31, 3.63, 3.40, 3.18, 2.40, 3.90, 4.13, 2.95, 1.50, 3.67,~
+$ blengthcm  <dbl> 50.80, 53.34, 53.34, 50.80, 48.26, 50.80, 55.88, 48.26, 50.~
+$ bheadcircm <dbl> 33.02, 33.02, 33.02, 33.02, 33.02, 35.56, 38.10, 33.02, 30.~
+$ gestwks    <dbl> 37, 41, 39, 39, 37, 43, 40, 37, 29, 41, 40, 39, 41, 41, 42,~
+$ mageyrs    <dbl> 33, 28, 32, 27, 32, 30, 23, 27, 32, 28, 26, 19, 37, 31, 29,~
+$ mheightcm  <dbl> 167.64, 160.02, 154.94, 172.72, 170.18, 160.02, 165.10, 162~
+$ mweightkg  <dbl> 63.50, 58.97, 57.15, 68.04, 50.80, 59.42, 60.78, 56.70, 64.~
+$ mcig       <dbl> 25, 0, 0, 2, 17, 0, 0, 17, 0, 0, 25, 0, 25, 17, 0, 0, 0, 0,~
+$ fageyrs    <dbl> 37, 35, 38, 30, 28, 34, 26, 29, 32, 41, 26, 27, 46, 38, 30,~
+$ fheightcm  <dbl> 187.96, 180.34, 165.10, 185.42, 180.34, 167.64, 180.34, 180~
+$ fedyrs     <dbl> 12, 10, 12, 16, 10, 12, 12, 12, 14, 16, 16, 12, 16, 16, 16,~
+$ fcig       <dbl> 25, 7, 17, 7, 17, 17, 0, 7, 0, 0, 25, 2, 0, 17, 0, 2, 12, 0~
+$ lowbwt     <dbl> 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+\end{verbatim}
+
+\hypertarget{variuxe1veis-de-interesse}{%
+\subsubsection{Variáveis de Interesse}\label{variuxe1veis-de-interesse}}
+
+Nesta análise estatística, iremos focar nas variáveis gestwks, mageyrs,
+mheightcm e bwtkg.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(dados\_all, gestwks, mageyrs, mheightcm, bwtkg)}
+\FunctionTok{glimpse}\NormalTok{(dados)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Rows: 680
+Columns: 4
+$ gestwks   <dbl> 37, 41, 39, 39, 37, 43, 40, 37, 29, 41, 40, 39, 41, 41, 42, ~
+$ mageyrs   <dbl> 33, 28, 32, 27, 32, 30, 23, 27, 32, 28, 26, 19, 37, 31, 29, ~
+$ mheightcm <dbl> 167.64, 160.02, 154.94, 172.72, 170.18, 160.02, 165.10, 162.~
+$ bwtkg     <dbl> 3.31, 3.63, 3.40, 3.18, 2.40, 3.90, 4.13, 2.95, 1.50, 3.67, ~
+\end{verbatim}
+
+\hypertarget{visualizando-os-dados}{%
+\subsubsection{Visualizando os Dados}\label{visualizando-os-dados}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(dados[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{,])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rrrr@{}}
+\toprule()
+gestwks & mageyrs & mheightcm & bwtkg \\
+\midrule()
+\endhead
+37 & 33 & 167.64 & 3.31 \\
+41 & 28 & 160.02 & 3.63 \\
+39 & 32 & 154.94 & 3.40 \\
+39 & 27 & 172.72 & 3.18 \\
+37 & 32 & 170.18 & 2.40 \\
+43 & 30 & 160.02 & 3.90 \\
+40 & 23 & 165.10 & 4.13 \\
+37 & 27 & 162.56 & 2.95 \\
+29 & 32 & 162.56 & 1.50 \\
+41 & 28 & 167.64 & 3.67 \\
+40 & 26 & 154.94 & 3.54 \\
+39 & 19 & 165.10 & 3.63 \\
+41 & 37 & 160.02 & 3.54 \\
+41 & 31 & 154.94 & 3.95 \\
+42 & 29 & 167.64 & 3.86 \\
+42 & 27 & 170.18 & 3.67 \\
+40 & 20 & 167.64 & 3.49 \\
+41 & 22 & 172.72 & 3.45 \\
+39 & 27 & 172.72 & 3.45 \\
+42 & 23 & 152.40 & 3.58 \\
+\bottomrule()
+\end{longtable}
+
+\hypertarget{anuxe1lise-exploratuxf3ria-dos-dados}{%
+\section{Análise Exploratória dos
+Dados}\label{anuxe1lise-exploratuxf3ria-dos-dados}}
+
+Iremos realizar uma análise exploratória dos dados, buscando extrair
+informações e observar possíveis correlações entre as variáveis.
+
+\hypertarget{resumo-dos-dados}{%
+\subsection{Resumo dos Dados}\label{resumo-dos-dados}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{skim}\NormalTok{(dados)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Data summary}\tabularnewline
+\toprule()
+\endhead
+Name & dados \\
+Number of rows & 680 \\
+Number of columns & 4 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Column type frequency: & \\
+numeric & 4 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Group variables & None \\
+\bottomrule()
+\end{longtable}
+
+\textbf{Variable type: numeric}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1538}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1099}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1538}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0769}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0549}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0769}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0769}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0769}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0769}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0769}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0659}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+skim\_variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_missing
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+complete\_rate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+mean
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+sd
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p0
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p25
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p50
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p75
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p100
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+hist
+\end{minipage} \\
+\midrule()
+\endhead
+gestwks & 0 & 1 & 39.77 & 1.88 & 29.00 & 39.00 & 40.00 & 41.00 & 48.00 &
+▁▁▇▃▁ \\
+mageyrs & 0 & 1 & 25.86 & 5.46 & 15.00 & 21.00 & 25.00 & 29.00 & 42.00 &
+▅▇▇▂▁ \\
+mheightcm & 0 & 1 & 163.66 & 6.31 & 144.78 & 160.02 & 162.56 & 167.64 &
+180.34 & ▁▃▇▅▁ \\
+bwtkg & 0 & 1 & 3.41 & 0.50 & 1.50 & 3.08 & 3.45 & 3.72 & 5.17 &
+▁▂▇▃▁ \\
+\bottomrule()
+\end{longtable}
+
+\hypertarget{anuxe1lise-descritiva-das-variuxe1veis}{%
+\subsection{Análise Descritiva das
+Variáveis}\label{anuxe1lise-descritiva-das-variuxe1veis}}
+
+Nesta seção, iremos analisar as variáveis de forma univariada, fazendo
+uso de testes de normalidade e gráficos do tipo histograma, boxplot e
+densidade.
+
+\hypertarget{idade-gestacional-gestwks}{%
+\subsubsection{Idade Gestacional
+(gestwks)}\label{idade-gestacional-gestwks}}
+
+Teste Normalidade Shapiro-Wilk
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{shapiro.test}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{gestwks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Shapiro-Wilk normality test
+
+data:  dados$gestwks
+W = 0.93902, p-value = 4.551e-16
+\end{verbatim}
+
+Como o Valor p \textless{} 0.05, logo podemos concluir que a variável
+Idade Gestacional não segue a distribuição normal.
+
+Gráficos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{gestwks, }\AttributeTok{main =} \StringTok{"Histograma de Idade Gestacional"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Idade Gestacional (em semanas)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-7-1.pdf}
+
+}
+
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{( }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{mageyrs)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{fill=}\StringTok{"\#69b3a2"}\NormalTok{, }\AttributeTok{color=}\StringTok{"\#e9ecef"}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.8}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Distribuição de Idade Gestacional"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{xlab}\NormalTok{(}\StringTok{"Idade Gestacional (em semanas)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-7-2.pdf}
+
+}
+
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{gestwks,}\AttributeTok{main =} \StringTok{"Boxplot de Idade Gestacional"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-7-3.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{altura-da-muxe3e-mheightcm}{%
+\subsubsection{Altura da Mãe
+(mheightcm)}\label{altura-da-muxe3e-mheightcm}}
+
+Teste Normalidade Shapiro-Wilk
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{shapiro.test}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{mheightcm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Shapiro-Wilk normality test
+
+data:  dados$mheightcm
+W = 0.98429, p-value = 1.098e-06
+\end{verbatim}
+
+Como o Valor p \textless{} 0.05, logo podemos concluir que a variável
+Altura da Mãe não segue a distribuição normal.
+
+Gráficos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{mheightcm, }\AttributeTok{main =} \StringTok{"Histograma de Altura da Mãe"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Altura (em cm)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-9-1.pdf}
+
+}
+
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{( }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{mheightcm)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{fill=}\StringTok{"\#69b3a2"}\NormalTok{, }\AttributeTok{color=}\StringTok{"\#e9ecef"}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.8}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Distribuição de Altura da Mãe"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{xlab}\NormalTok{(}\StringTok{"Altura (em cm)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-9-2.pdf}
+
+}
+
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{mheightcm, }\AttributeTok{main =} \StringTok{"Boxplot de Altura da Mãe"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-9-3.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{idade-da-muxe3e-mageyrs}{%
+\subsubsection{Idade da Mãe (mageyrs)}\label{idade-da-muxe3e-mageyrs}}
+
+Teste Normalidade Shapiro-Wilk
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{shapiro.test}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{mageyrs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Shapiro-Wilk normality test
+
+data:  dados$mageyrs
+W = 0.95297, p-value = 6.537e-14
+\end{verbatim}
+
+Como o Valor p \textless{} 0.05, logo podemos concluir que a variável
+Idade da Mãe não segue a distribuição normal.
+
+Gráficos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{mageyrs, }\AttributeTok{main =} \StringTok{"Histograma de Idade da Mãe"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Idade (em anos)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-11-1.pdf}
+
+}
+
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{( }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{mageyrs)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{fill=}\StringTok{"\#69b3a2"}\NormalTok{, }\AttributeTok{color=}\StringTok{"\#e9ecef"}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.8}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Distribuição de Idade da Mãe"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{xlab}\NormalTok{(}\StringTok{"Idade (em anos)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-11-2.pdf}
+
+}
+
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{mageyrs, }\AttributeTok{main =} \StringTok{"Boxplot de Idade da Mãe"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-11-3.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{peso-ao-nascer-bwtkg}{%
+\subsubsection{Peso ao Nascer (bwtkg)}\label{peso-ao-nascer-bwtkg}}
+
+\hypertarget{teste-normalidade-shapiro-wilk}{%
+\paragraph{Teste Normalidade
+Shapiro-Wilk}\label{teste-normalidade-shapiro-wilk}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{shapiro.test}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{bwtkg)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Shapiro-Wilk normality test
+
+data:  dados$bwtkg
+W = 0.99639, p-value = 0.1244
+\end{verbatim}
+
+Como o valor p \textgreater{} 0.05, podemos concluir que a variável Peso
+ao Nascer segue a distribuição normal.
+
+\hypertarget{gruxe1ficos}{%
+\subparagraph{Gráficos:}\label{gruxe1ficos}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{bwtkg, }\AttributeTok{main =} \StringTok{"Histograma de Peso ao Nascer"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Peso (em kg)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-13-1.pdf}
+
+}
+
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{( }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{bwtkg)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{fill=}\StringTok{"\#69b3a2"}\NormalTok{, }\AttributeTok{color=}\StringTok{"\#e9ecef"}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.8}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Distribuição de Peso ao Nascer"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{xlab}\NormalTok{(}\StringTok{"Peso (em kg)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-13-2.pdf}
+
+}
+
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{bwtkg, }\AttributeTok{main =} \StringTok{"Boxplot de Peso ao Nascer"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-13-3.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{observauxe7uxf5es-importantes}{%
+\subsubsection{Observações
+Importantes}\label{observauxe7uxf5es-importantes}}
+
+Observando os gráficos de boxplot das variáveis, notamos a presença de
+outliers em todas as variáveis do conjunto de dados sendo estudado.
+Analisando os testes de normalidade feitos, nota-se que apenas a
+variável Peso ao Nascer (bwtkg) segue a distribuição normal. Com isso,
+optamos por utilizar também o Teste de Spearman para analisar
+correlações entre variáveis.
+
+\hypertarget{analisando-correlauxe7uxf5es-entre-variuxe1veis}{%
+\subsection{Analisando Correlações entre
+Variáveis}\label{analisando-correlauxe7uxf5es-entre-variuxe1veis}}
+
+Nesta seção iremos analisar as variáveis de forma bi-variada, buscando
+visualizar possíveis correlações entre as variáveis Idade da
+Mãe(mageyrs), Altura da Mãe(mheightcm) e Idade Gestacional(gestwks) com
+a variável Peso ao Nascer(bwtkg).
+
+\hypertarget{idade-gestacional-e-peso-ao-nascer}{%
+\subsubsection{Idade Gestacional e Peso ao
+Nascer}\label{idade-gestacional-e-peso-ao-nascer}}
+
+\hypertarget{visualizando-relauxe7uxf5es-entre-variuxe1veis}{%
+\paragraph{Visualizando Relações entre
+Variáveis}\label{visualizando-relauxe7uxf5es-entre-variuxe1veis}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{gestwks, dados}\SpecialCharTok{$}\NormalTok{bwtkg, }\AttributeTok{xlab=}\StringTok{"Idade Gestacional"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Peso ao Nascer"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-14-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{coeficiente-de-correlauxe7uxe3o}{%
+\paragraph{Coeficiente de
+Correlação}\label{coeficiente-de-correlauxe7uxe3o}}
+
+Estimativa do coeficiente de correlação (linear) entre variáveis
+numéricas.
+
+Coeficiente de Pearson:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{bwtkg, dados}\SpecialCharTok{$}\NormalTok{gestwks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.4259589
+\end{verbatim}
+
+Coeficiente de Spearman:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{bwtkg, dados}\SpecialCharTok{$}\NormalTok{gestwks, }\AttributeTok{method=}\StringTok{"spearman"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.4050987
+\end{verbatim}
+
+\hypertarget{altura-da-muxe3e-e-peso-ao-nascer}{%
+\subsubsection{Altura da Mãe e Peso ao
+Nascer}\label{altura-da-muxe3e-e-peso-ao-nascer}}
+
+\hypertarget{visualizando-relauxe7uxf5es-entre-variuxe1veis-1}{%
+\paragraph{Visualizando Relações entre
+Variáveis}\label{visualizando-relauxe7uxf5es-entre-variuxe1veis-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{mheightcm, dados}\SpecialCharTok{$}\NormalTok{bwtkg, }\AttributeTok{xlab=}\StringTok{"Altura da Mãe"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Peso ao Nascer"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-17-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{coeficiente-de-correlauxe7uxe3o-1}{%
+\paragraph{Coeficiente de
+Correlação}\label{coeficiente-de-correlauxe7uxe3o-1}}
+
+Estimativa do coeficiente de correlação (linear) entre variáveis
+numéricas.
+
+Coeficiente de Pearson:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{bwtkg, dados}\SpecialCharTok{$}\NormalTok{mheightcm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.2025446
+\end{verbatim}
+
+Coeficiente de Spearman:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{bwtkg, dados}\SpecialCharTok{$}\NormalTok{mheightcm, }\AttributeTok{method=}\StringTok{"spearman"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.1996057
+\end{verbatim}
+
+\hypertarget{idade-da-muxe3e-e-peso-ao-nascer}{%
+\subsubsection{Idade da Mãe e Peso ao
+Nascer}\label{idade-da-muxe3e-e-peso-ao-nascer}}
+
+\hypertarget{visualizando-relauxe7uxf5es-entre-variuxe1veis-2}{%
+\paragraph{Visualizando Relações entre
+Variáveis}\label{visualizando-relauxe7uxf5es-entre-variuxe1veis-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{mageyrs, dados}\SpecialCharTok{$}\NormalTok{bwtkg, }\AttributeTok{xlab=}\StringTok{"Idade da Mãe"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Peso ao Nascer"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-20-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{coeficiente-de-correlauxe7uxe3o-2}{%
+\paragraph{Coeficiente de
+Correlação}\label{coeficiente-de-correlauxe7uxe3o-2}}
+
+Estimativa do coeficiente de correlação (linear) entre variáveis
+numéricas.
+
+Coeficiente de Pearson:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{bwtkg, dados}\SpecialCharTok{$}\NormalTok{mageyrs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.0009591992
+\end{verbatim}
+
+Coeficiente de Spearman:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{bwtkg, dados}\SpecialCharTok{$}\NormalTok{mageyrs, }\AttributeTok{method=}\StringTok{"spearman"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.02201139
+\end{verbatim}
+
+\hypertarget{visualizando-a-correlauxe7uxe3o-das-4-variuxe1veis}{%
+\subsection{Visualizando a Correlação das 4
+Variáveis}\label{visualizando-a-correlauxe7uxe3o-das-4-variuxe1veis}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(dados)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-23-1.pdf}
+
+}
+
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{matrix.cor }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(dados, }\AttributeTok{method=}\StringTok{"spearman"}\NormalTok{)}
+
+\FunctionTok{corrplot}\NormalTok{(matrix.cor, }\AttributeTok{method=}\StringTok{"color"}\NormalTok{, }\AttributeTok{addCoef.col=}\StringTok{"black"}\NormalTok{, }\AttributeTok{type=}\StringTok{"upper"}\NormalTok{, }\AttributeTok{diag=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-23-2.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{anuxe1lise-indutiva}{%
+\section{Análise Indutiva}\label{anuxe1lise-indutiva}}
+
+Analisando os resultados obtidos na seção anterior, podemos inferir que
+existe uma correlação moderada entre a Idade Gestacional e o Peso Ao
+Nascer, com coeficiente de Spearman de 0.40 e de Pearson de 0.42. Também
+podemos inferir que existe uma correlação fraca entre a Altura da Mãe e
+o Peso ao Nascer, com coeficiente de Pearson de 0.20 e Coeficiente de
+Spearman de 0.20. Nota-se que a correlação entre Idade da Mãe e Peso ao
+Nascer é extremamente fraca ou inexistente, com o Coeficiente de
+Spearman de 0.02 e Coeficiente de Pearson de 0.001. Com isso, iremos
+aplicar um teste de hipótese para observar a associação entre essas
+variáveis.
+
+\hypertarget{peso-ao-nascer-e-idade-gestacional}{%
+\subsection{Peso Ao Nascer e Idade
+Gestacional}\label{peso-ao-nascer-e-idade-gestacional}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cor.result.gestwks }\OtherTok{\textless{}{-}} \FunctionTok{cor.test}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{gestwks, dados}\SpecialCharTok{$}\NormalTok{bwtkg)}
+\NormalTok{cor.result.gestwks}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Pearson's product-moment correlation
+
+data:  dados$gestwks and dados$bwtkg
+t = 12.259, df = 678, p-value < 2.2e-16
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.3623791 0.4855928
+sample estimates:
+      cor 
+0.4259589 
+\end{verbatim}
+
+Aplicando um teste de hipótese para verificar a existência de associação
+entre as variáveis Idade Gestacional e Peso Ao Nascer, encontramos
+intervalo de confiança entre 0.36 e 0.49. Como este intervalo não contém
+a correlação nula (=0), podemos concluir com 95\% de confiança que
+existe associação linear e positiva entre essas variáveis. Ou seja,
+quanto maior o Tempo de Gestação, maior será o Peso ao Nascer do
+recém-nascido.
+
+\hypertarget{peso-ao-nascer-e-altura-da-muxe3e}{%
+\subsection{Peso ao Nascer e Altura da
+Mãe}\label{peso-ao-nascer-e-altura-da-muxe3e}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cor.result.mheightcm }\OtherTok{\textless{}{-}} \FunctionTok{cor.test}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{mheightcm, dados}\SpecialCharTok{$}\NormalTok{bwtkg)}
+\NormalTok{cor.result.mheightcm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Pearson's product-moment correlation
+
+data:  dados$mheightcm and dados$bwtkg
+t = 5.3856, df = 678, p-value = 9.968e-08
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.1293287 0.2735640
+sample estimates:
+      cor 
+0.2025446 
+\end{verbatim}
+
+Aplicando um teste de hipótese para verificar a existência de associação
+entre as variáveis Altura da Mãe e Peso Ao Nascer, encontramos intervalo
+de confiança entre 0.13 e 0.27. Como este intervalo não contém a
+correlação nula (=0), podemos concluir com 95\% de confiança que existe
+associação linear e positiva entre essas variáveis. Ou seja, quanto
+maior a Altura da Mãe, maior será o Peso ao Nascer do recém-nascido.
+
+\hypertarget{peso-ao-nascer-e-idade-da-muxe3e}{%
+\subsection{Peso ao Nascer e Idade da
+Mãe}\label{peso-ao-nascer-e-idade-da-muxe3e}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cor.result.mageyrs }\OtherTok{\textless{}{-}} \FunctionTok{cor.test}\NormalTok{(dados}\SpecialCharTok{$}\NormalTok{mageyrs, dados}\SpecialCharTok{$}\NormalTok{bwtkg)}
+\NormalTok{cor.result.mageyrs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Pearson's product-moment correlation
+
+data:  dados$mageyrs and dados$bwtkg
+t = 0.024976, df = 678, p-value = 0.9801
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.07423154  0.07613909
+sample estimates:
+         cor 
+0.0009591992 
+\end{verbatim}
+
+Aplicando um teste de hipótese para verificar a existência de associação
+entre as variáveis Idade da Mãe e Peso Ao Nascer, encontramos intervalo
+de confiança entre -0.07 e 0.07. Como este intervalo contém a correlação
+nula (=0), podemos concluir com 95\% de confiança que não existe
+associação entre essas variáveis.
+
+\hypertarget{anuxe1lise-de-regressuxe3o-linear}{%
+\section{Análise de Regressão
+Linear}\label{anuxe1lise-de-regressuxe3o-linear}}
+
+Nessa seção, iremos utilizar Modelos de Regressão Linear Simples para as
+variáveis \protect\hyperlink{idade-gestacional-e-peso-ao-nascer-1}{Idade
+Gestacional e Peso ao Nascer},
+\protect\hyperlink{idade-da-muxe3e-e-peso-ao-nascer-1}{Idade da Mãe e
+Peso ao Nascer} e
+\protect\hyperlink{altura-da-muxe3e-e-peso-ao-nascer-1}{Altura da Mãe e
+Peso ao Nascer}.
+
+\hypertarget{idade-gestacional-e-peso-ao-nascer-1}{%
+\subsection{Idade Gestacional e Peso Ao
+Nascer}\label{idade-gestacional-e-peso-ao-nascer-1}}
+
+\hypertarget{anuxe1lise-do-modelo}{%
+\subsubsection{Análise do Modelo}\label{anuxe1lise-do-modelo}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model.gestwks }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(bwtkg}\SpecialCharTok{\textasciitilde{}}\NormalTok{gestwks, dados)}
+\FunctionTok{summary}\NormalTok{(model.gestwks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = bwtkg ~ gestwks, data = dados)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.43502 -0.28249  0.01492  0.28621  1.50992 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -1.066189   0.365473  -2.917  0.00365 ** 
+gestwks      0.112530   0.009179  12.259  < 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4486 on 678 degrees of freedom
+Multiple R-squared:  0.1814,    Adjusted R-squared:  0.1802 
+F-statistic: 150.3 on 1 and 678 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+Dado que o valor p do F-Statistic suficientemente pequeno, rejeita-se a
+Hipótese Nula (\(\beta = 0\)). Admitindo a Hipótese Alternativa
+(\(\beta \not= 0\)), a Idade Gestacional exerce influência linear sobre
+o Peso ao Nascer.
+
+\[
+y = -1.1 + 0.11x
+\]
+
+\hypertarget{verificauxe7uxe3o-dos-pressupostos-da-regressuxe3o-linear}{%
+\subsubsection{Verificação dos Pressupostos da Regressão
+Linear}\label{verificauxe7uxe3o-dos-pressupostos-da-regressuxe3o-linear}}
+
+\hypertarget{anuxe1lise-gruxe1fica}{%
+\paragraph{Análise Gráfica}\label{anuxe1lise-gruxe1fica}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(model.gestwks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-28-1.pdf}
+
+}
+
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Analisando o Gráfico de Resíduos-Fitted, nota-se que a linha dos
+  resíduos aproxima-se do eixo horizontal do gráfico, porém com um
+  padrão similar a uma parábola, indicando que talvez existam relações
+  não-lineares não explicadas pelo modelo.
+\item
+  Analisando o Gráfico Q-Q Normal, verificamos que os resíduos se
+  aproximam bastante da linha diagonal tracejada, sendo uma boa
+  indicação para o modelo, que os resíduos seguem a distribuição normal.
+\item
+  Analisando o Gráfico Scale-Location, verificamos que os resíduos não
+  estão distribuídos igualmente ao longo de uma linha horizontal,
+  formando padrões ao longo do gráfico, levando ao questionamento da
+  Homocedasticidade.
+\item
+  Analisando o Gráfico de Alavancagem, não há indicações de casos
+  influenciais no estudo (outliers que possam influenciar na regressão
+  linear), todos os casos aparentam estar dentro das linhas da Distância
+  de Cook.
+\end{itemize}
+
+\hypertarget{verificauxe7uxe3o-por-testes-de-hipuxf3tese}{%
+\paragraph{Verificação por Testes de
+Hipótese}\label{verificauxe7uxe3o-por-testes-de-hipuxf3tese}}
+
+\hypertarget{teste-de-normalidade-shapiro-wilk}{%
+\subparagraph{Teste de Normalidade
+Shapiro-Wilk}\label{teste-de-normalidade-shapiro-wilk}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{shapiro.test}\NormalTok{(model.gestwks}\SpecialCharTok{$}\NormalTok{residuals)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Shapiro-Wilk normality test
+
+data:  model.gestwks$residuals
+W = 0.99716, p-value = 0.2848
+\end{verbatim}
+
+Dado que o valor p não é suficientemente pequeno (0.28), admite-se a
+Hipótese Nula que os resíduos seguem a distribuição normal.
+
+\hypertarget{outliers-nos-resuxedduos}{%
+\subparagraph{Outliers nos Resíduos}\label{outliers-nos-resuxedduos}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{rstandard}\NormalTok{(model.gestwks))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+-3.201361 -0.630276  0.033342 -0.000243  0.638674  3.371924 
+\end{verbatim}
+
+Espera-se que, seguindo a distribuição normal, os valores estariam entre
+-3 e 3. Porém os valores mínimos e máximo dos resíduos são -3.2 e 3.37,
+indicando a presença de possíveis outliers nos dados.
+
+\hypertarget{independuxeancia-dos-resuxedduos-com-estatuxedstica-de-durbin-watson}{%
+\subparagraph{Independência dos Resíduos com Estatística de
+Durbin-Watson}\label{independuxeancia-dos-resuxedduos-com-estatuxedstica-de-durbin-watson}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{durbinWatsonTest}\NormalTok{(model.gestwks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ lag Autocorrelation D-W Statistic p-value
+   1     -0.01116268      2.018007   0.816
+ Alternative hypothesis: rho != 0
+\end{verbatim}
+
+Dado que a estatística de Durbin-Watson está entre 1 e 3 (2.18), que
+reforça uma ideia de Independência dos Resíduos. Em seguida, avaliando o
+valor p, temos que o valor p é suficientemente grande (0.77
+\textgreater{} 0.05), não se rejeita a hipótese nula, admitindo que há
+independência dos resíduos.
+
+\hypertarget{teste-de-homocedasticidade-breusch-pagan}{%
+\subparagraph{Teste de Homocedasticidade
+Breusch-Pagan}\label{teste-de-homocedasticidade-breusch-pagan}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{bptest}\NormalTok{(model.gestwks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    studentized Breusch-Pagan test
+
+data:  model.gestwks
+BP = 2.2613, df = 1, p-value = 0.1326
+\end{verbatim}
+
+Dado que o valor p do Teste Breusch-Pagan é de 0.13, não se rejeita a
+hipótese nula. Logo, podemos concluir que o modelo é homocedástico.
+
+\hypertarget{visualizauxe7uxe3o-gruxe1fica}{%
+\subsubsection{Visualização
+Gráfica}\label{visualizauxe7uxe3o-gruxe1fica}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{dados, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(gestwks, bwtkg)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_regline\_equation}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+`geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-33-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{altura-da-muxe3e-e-peso-ao-nascer-1}{%
+\subsection{Altura da Mãe e Peso ao
+Nascer}\label{altura-da-muxe3e-e-peso-ao-nascer-1}}
+
+\hypertarget{anuxe1lise-do-modelo-1}{%
+\subsubsection{Análise do Modelo}\label{anuxe1lise-do-modelo-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model.mheightcm }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(bwtkg}\SpecialCharTok{\textasciitilde{}}\NormalTok{mheightcm, dados)}
+\FunctionTok{summary}\NormalTok{(model.mheightcm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = bwtkg ~ mheightcm, data = dados)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.89167 -0.31387  0.00833  0.31884  1.81874 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.805332   0.483849   1.664   0.0965 .  
+mheightcm   0.015910   0.002954   5.386 9.97e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4855 on 678 degrees of freedom
+Multiple R-squared:  0.04102,   Adjusted R-squared:  0.03961 
+F-statistic:    29 on 1 and 678 DF,  p-value: 9.968e-08
+\end{verbatim}
+
+Dado que o valor p do F-Statistic suficientemente pequeno, rejeita-se a
+Hipótese Nula (\(\beta = 0\)). Admitindo a Hipótese Alternativa
+(\(\beta \not= 0\)), a Altura da Mãe exerce influência linear sobre o
+Peso ao Nascer.
+
+\[
+y = 0.8 +0.016x
+\]
+
+\hypertarget{verificauxe7uxe3o-dos-pressupostos-da-regressuxe3o-linear-1}{%
+\subsubsection{Verificação dos Pressupostos da Regressão
+Linear}\label{verificauxe7uxe3o-dos-pressupostos-da-regressuxe3o-linear-1}}
+
+\hypertarget{anuxe1lise-gruxe1fica-1}{%
+\paragraph{Análise Gráfica}\label{anuxe1lise-gruxe1fica-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(model.mheightcm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-35-1.pdf}
+
+}
+
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Analisando o Gráfico de Resíduos-Fitted, nota-se que a linha dos
+  resíduos aproxima-se de uma linha horizontal sem padrões que possam
+  ser distinguidos, indicando que não há relações não-lineares das
+  variáveis nos dados, e indicando uma relação linear entre as
+  variáveis.
+\item
+  Analisando o Gráfico Q-Q Normal, verificamos que os resíduos se
+  aproximam bastante da linha diagonal tracejada, sendo uma boa
+  indicação para o modelo, que os resíduos seguem a distribuição normal.
+\item
+  Analisando o Gráfico Scale-Location, verificamos que os resíduos estão
+  distribuídos pelo gráfico, formando padrões em linhas verticais, não
+  distribuídos igualmente. Essa observação leva ao questionanamento da
+  Homocedasticidade.
+\item
+  Analisando o Gráfico de Alavancagem, não há indicações de casos
+  influenciais no estudo (outliers que possam influenciar na regressão
+  linear), todos os casos aparentam estar dentro das linhas da Distância
+  de Cook.
+\end{itemize}
+
+\hypertarget{verificauxe7uxe3o-por-testes-de-hipuxf3tese-1}{%
+\paragraph{Verificação por Testes de
+Hipótese}\label{verificauxe7uxe3o-por-testes-de-hipuxf3tese-1}}
+
+\hypertarget{teste-de-normalidade-shapiro-wilk-1}{%
+\subparagraph{Teste de Normalidade
+Shapiro-Wilk}\label{teste-de-normalidade-shapiro-wilk-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{shapiro.test}\NormalTok{(model.mheightcm}\SpecialCharTok{$}\NormalTok{residuals)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Shapiro-Wilk normality test
+
+data:  model.mheightcm$residuals
+W = 0.99684, p-value = 0.2048
+\end{verbatim}
+
+Dado que o valor p não é suficientemente pequeno (0.20), admite-se a
+Hipótese Nula que os resíduos seguem a distribuição normal.
+
+\hypertarget{outliers-nos-resuxedduos-1}{%
+\subparagraph{Outliers nos Resíduos}\label{outliers-nos-resuxedduos-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{rstandard}\NormalTok{(model.mheightcm))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+-3.898959 -0.647143  0.017160 -0.000015  0.657389  3.749465 
+\end{verbatim}
+
+Espera-se que, seguindo a distribuição normal, os valores estariam entre
+-3 e 3. Porém os valores mínimos e máximo dos resíduos são -3.9 e 3.75,
+indicando a presença de outliers nos dados.
+
+\hypertarget{independuxeancia-dos-resuxedduos-com-estatuxedstica-de-durbin-watson-1}{%
+\subparagraph{Independência dos Resíduos com Estatística de
+Durbin-Watson}\label{independuxeancia-dos-resuxedduos-com-estatuxedstica-de-durbin-watson-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{durbinWatsonTest}\NormalTok{(model.mheightcm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ lag Autocorrelation D-W Statistic p-value
+   1     -0.01932041       2.03573   0.696
+ Alternative hypothesis: rho != 0
+\end{verbatim}
+
+Dado que a estatística de Durbin-Watson está entre 1 e 3 (2.03), que
+reforça uma ideia de Independência dos Resíduos. Em seguida, avaliando o
+valor p, temos que o valor p é suficientemente grande (0.68
+\textgreater{} 0.05), não se rejeita a hipótese nula, admitindo que há
+independência dos resíduos.
+
+\hypertarget{teste-de-homocedasticidade-breusch-pagan-1}{%
+\paragraph{Teste de Homocedasticidade
+Breusch-Pagan}\label{teste-de-homocedasticidade-breusch-pagan-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{bptest}\NormalTok{(model.mheightcm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    studentized Breusch-Pagan test
+
+data:  model.mheightcm
+BP = 0.2296, df = 1, p-value = 0.6318
+\end{verbatim}
+
+Dado que o valor p do Teste Breusch-Pagan é de 0.64, consideravelmente
+maior que 0.05, logo, não se rejeita a hipótese nula e podemos concluir
+que o modelo é homocedástico.
+
+\hypertarget{visualizauxe7uxe3o-gruxe1fica-1}{%
+\subsubsection{Visualização
+Gráfica}\label{visualizauxe7uxe3o-gruxe1fica-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{dados, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(mheightcm, bwtkg)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_regline\_equation}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+`geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-40-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{idade-da-muxe3e-e-peso-ao-nascer-1}{%
+\subsection{Idade da Mãe e Peso ao
+Nascer}\label{idade-da-muxe3e-e-peso-ao-nascer-1}}
+
+\hypertarget{anuxe1lise-do-modelo-2}{%
+\subsubsection{Análise do Modelo}\label{anuxe1lise-do-modelo-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model.mageyrs }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(bwtkg}\SpecialCharTok{\textasciitilde{}}\NormalTok{mageyrs, dados)}
+\FunctionTok{summary}\NormalTok{(model.mageyrs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = bwtkg ~ mageyrs, data = dados)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.90974 -0.32939  0.03974  0.31133  1.76000 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 3.407e+00  9.204e-02  37.016   <2e-16 ***
+mageyrs     8.699e-05  3.483e-03   0.025     0.98    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4958 on 678 degrees of freedom
+Multiple R-squared:  9.201e-07, Adjusted R-squared:  -0.001474 
+F-statistic: 0.0006238 on 1 and 678 DF,  p-value: 0.9801
+\end{verbatim}
+
+Dado que o valor p do F-Statistic não é suficientemente pequeno,
+admite-se a Hipótese Nula (\(\beta = 0\)), a Idade da Mãe não exerce
+influência linear sobre o Peso ao Nascer.
+
+\[
+y = 3.4 +8.7*10^{-5}x
+\]
+
+\hypertarget{verificauxe7uxe3o-dos-pressupostos-da-regressuxe3o-linear-2}{%
+\subsubsection{Verificação dos Pressupostos da Regressão
+Linear}\label{verificauxe7uxe3o-dos-pressupostos-da-regressuxe3o-linear-2}}
+
+\hypertarget{anuxe1lise-gruxe1fica-2}{%
+\paragraph{Análise Gráfica}\label{anuxe1lise-gruxe1fica-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(model.mageyrs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-42-1.pdf}
+
+}
+
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Analisando o Gráfico de Resíduos-Fitted, nota-se que a linha dos
+  resíduos aproxima-se de uma linha horizontal sem padrões que possam
+  ser distinguidos, indicando que não há relações não-lineares que
+  possam ser percebidas, indicando uma relação linear entre as
+  variáveis.
+\item
+  Analisando o Gráfico Q-Q Normal, verificamos que os resíduos se
+  aproximam bastante da linha diagonal tracejada, sendo uma boa
+  indicação para o modelo que os resíduos seguem a distribuição normal.
+\item
+  Analisando o Gráfico Scale-Location, verificamos que os resíduos estão
+  distribuídos pelo gráfico, formando padrões em linhas verticais, não
+  distribuídos igualmente. Essa observação leva ao questionanamento da
+  Homocedasticidade.
+\item
+  Analisando o Gráfico de Alavancagem, não há indicações de casos
+  influenciais no estudo (outliers que possam influenciar na regressão
+  linear), todos os casos aparentam estar dentro das linhas da Distância
+  de Cook.
+\end{itemize}
+
+\hypertarget{verificauxe7uxe3o-por-testes-de-hipuxf3tese-2}{%
+\paragraph{Verificação por Testes de
+Hipótese}\label{verificauxe7uxe3o-por-testes-de-hipuxf3tese-2}}
+
+\hypertarget{teste-de-normalidade-shapiro-wilk-2}{%
+\subparagraph{Teste de Normalidade
+Shapiro-Wilk}\label{teste-de-normalidade-shapiro-wilk-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{shapiro.test}\NormalTok{(model.mageyrs}\SpecialCharTok{$}\NormalTok{residuals)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Shapiro-Wilk normality test
+
+data:  model.mageyrs$residuals
+W = 0.99644, p-value = 0.1325
+\end{verbatim}
+
+Dado que o valor p não é suficientemente pequeno (0.13), admite-se a
+Hipótese Nula que os resíduos seguem a distribuição normal.
+
+\hypertarget{outliers-nos-resuxedduos-2}{%
+\subparagraph{Outliers nos Resíduos}\label{outliers-nos-resuxedduos-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{rstandard}\NormalTok{(model.mageyrs))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+-3.858123 -0.664905  0.080530 -0.000079  0.628947  3.559653 
+\end{verbatim}
+
+Espera-se que, seguindo a distribuição normal, os valores dos resíduos
+estariam entre -3 e 3. Porém os valores mínimos e máximo dos resíduos
+são -3.86 e 3.56, indicando existe a presença de outliers nos dados.
+
+\hypertarget{independuxeancia-dos-resuxedduos-com-estatuxedstica-de-durbin-watson-2}{%
+\subparagraph{Independência dos Resíduos com Estatística de
+Durbin-Watson}\label{independuxeancia-dos-resuxedduos-com-estatuxedstica-de-durbin-watson-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{durbinWatsonTest}\NormalTok{(model.mageyrs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ lag Autocorrelation D-W Statistic p-value
+   1     0.005735402      1.986317    0.84
+ Alternative hypothesis: rho != 0
+\end{verbatim}
+
+Dado que a estatística de Durbin-Watson está entre 1 e 3 (1.98), que
+reforça uma ideia de Independência dos Resíduos. Em seguida, avaliando o
+valor p, temos que o valor p é suficientemente grande (0.85
+\textgreater{} 0.05), logo, não se rejeita a hipótese nula, admitindo
+que existe independência dos resíduos.
+
+\hypertarget{teste-de-homocedasticidade-breusch-pagan-2}{%
+\subparagraph{Teste de Homocedasticidade
+Breusch-Pagan}\label{teste-de-homocedasticidade-breusch-pagan-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{bptest}\NormalTok{(model.mageyrs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    studentized Breusch-Pagan test
+
+data:  model.mageyrs
+BP = 0.34671, df = 1, p-value = 0.556
+\end{verbatim}
+
+Dado que o valor p do Teste Breusch-Pagan é de 0.56, consideravelmente
+maior que 0.05, logo, não se rejeita a hipótese nula e podemos concluir
+que o modelo é homocedástico.
+
+\hypertarget{visualizauxe7uxe3o-gruxe1fica-2}{%
+\subsubsection{Visualização
+Gráfica}\label{visualizauxe7uxe3o-gruxe1fica-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{dados, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(mageyrs, bwtkg)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_regline\_equation}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+`geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{relatorio_files/figure-pdf/unnamed-chunk-47-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{conclusuxe3o}{%
+\section{Conclusão}\label{conclusuxe3o}}
+
+Através dos Testes do Pressuposto realizados, podemos concluir que os
+modelos de regressão linear gerados atendem aos pressupostos da
+regressão linear, logo apresentam confiabilidade.
+
+Analisando os resultados obtidos pelos Modelos de Regressão Linear,
+Análise de Correlação e pelos gráficos desenvolvidos, podemos concluir
+que os fatores Idades Gestacional e Altura da Mãe possuem relação de
+associação linear positiva com a variável Peso Ao Nascer. Observando os
+coeficientes de correlação e os modelos de regressão linear, podemos
+observar que o fator Idade Gestacional possui uma influência maior sobre
+o Peso quando comparado ao fator Altura da Mãe. Também podemos concluir
+que o fator Idade da Mãe não possui influência linear sobre o Peso ao
+Nascer, e possui correlação extremamente fraca e neglível com essa
+variável.
+
+Resumindo os resultados obtidos, podemos derivar as seguintes conclusões
+desse estudo:
+
+\begin{itemize}
+\tightlist
+\item
+  Os fatores Idade Gestacional e Altura da Mãe possuem influência linear
+  sobre o fator Peso ao Nascer da criança.
+\item
+  O fator Idade Gestacional é o fator mais relevante para se prever a
+  variável Peso ao Nascer, dentre os fatores analisados.
+\item
+  O fator Idade da Mãe não é relevante para prever a variável Peso ao
+  Nascer, por não possuir correlação significativa e não possuir
+  influência linear.
+\item
+  Os pressupostos do modelo de regressão linear são satisfeitas para
+  todos os 3 modelos criados.
+\end{itemize}
+
+\hypertarget{realizando-previsuxf5es-de-peso-ao-nascer}{%
+\subsection{Realizando Previsões De Peso ao
+Nascer}\label{realizando-previsuxf5es-de-peso-ao-nascer}}
+
+Para finalizar o estudo, utilizaremos os modelos de regressão para
+realizar previsões de Peso ao Nascer de uma criança a partir das
+variáveis de Idade Gestacional, Altura da Mãe e Idade da Mãe.
+
+\hypertarget{a-partir-na-idade-gestacional}{%
+\subsubsection{A partir na Idade
+Gestacional}\label{a-partir-na-idade-gestacional}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gestacaoX }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{38}\NormalTok{, }\DecValTok{43}\NormalTok{, }\DecValTok{36}\NormalTok{, }\DecValTok{39}\NormalTok{)}
+\NormalTok{df.gestacaoX }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\StringTok{"gestwks"} \OtherTok{=}\NormalTok{ gestacaoX)}
+\NormalTok{previsoes.gestacao }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.gestwks, df.gestacaoX)}
+
+\NormalTok{resultados.gestacao }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(gestacaoX, previsoes.gestacao)}
+\NormalTok{resultados.gestacao}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  gestacaoX previsoes.gestacao
+1        38           3.209961
+2        43           3.772612
+3        36           2.984901
+4        39           3.322491
+\end{verbatim}
+
+\hypertarget{a-partir-da-altura-da-muxe3e}{%
+\subsubsection{A partir da Altura da
+Mãe}\label{a-partir-da-altura-da-muxe3e}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alturaX }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{164}\NormalTok{, }\DecValTok{180}\NormalTok{, }\DecValTok{146}\NormalTok{, }\DecValTok{172}\NormalTok{)}
+\NormalTok{df.alturaX }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\StringTok{"mheightcm"} \OtherTok{=}\NormalTok{ alturaX)}
+\NormalTok{previsoes.altura }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.mheightcm, df.alturaX)}
+
+\NormalTok{resultados.altura }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(alturaX, previsoes.altura)}
+\NormalTok{resultados.altura}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  alturaX previsoes.altura
+1     164         3.414585
+2     180         3.669146
+3     146         3.128203
+4     172         3.541866
+\end{verbatim}
+
+\hypertarget{a-partir-da-idade-da-muxe3e}{%
+\subsubsection{A partir da Idade da
+Mãe}\label{a-partir-da-idade-da-muxe3e}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{idadeX }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{27}\NormalTok{, }\DecValTok{37}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{54}\NormalTok{)}
+\NormalTok{df.idadeX }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\StringTok{"mageyrs"} \OtherTok{=}\NormalTok{ idadeX)}
+\NormalTok{previsoes.idade }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model.mageyrs, df.idadeX)}
+
+\NormalTok{resultados.idade }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(idadeX, previsoes.idade)}
+\NormalTok{resultados.idade}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  idadeX previsoes.idade
+1     27        3.409305
+2     37        3.410175
+3     22        3.408870
+4     54        3.411654
+\end{verbatim}
+
+
+
+\end{document}

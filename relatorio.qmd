@@ -1,0 +1,568 @@
+---
+title: "Análise de Correlação e Regressão Linear Simples"
+format: 
+  pdf:
+    toc: true
+    number-depth: 3
+    number-sections: true
+    toc-title: Sumário
+    toc-location: body
+editor: visual
+author: 
+  - Anderson dos Santos Silva
+  - José Alves de Figueiredo Neto
+---
+
+# Introdução
+
+O Conjunto de Dados de Saude e Desenvolvimento da Criança foi projetado para avaliar fatores relacionados ao baixo peso ao nascer em crianças. O conjunto de dados do software Stata chdsmetric.dta contém as seguintes variáveis:
+
+1.  bwtkg (birth weight, in kg) / (peso ao nascer, em kg)
+2.  blengthcm (birth length, in cm) / (comprimento ao nascer, em cm)
+3.  bheadcircm (birth head circumference, in cm) / (perímetro cefálico de nascimento, em cm)
+4.  gestwks (gestational age, in weeks) / (idade gestacional, em semanas)
+5.  mageyrs (mother's age, in years) / (idade da mãe , em anos)
+6.  mheightcm (mother's height, in cm) / (altura da mãe, em cm)
+7.  mweightkg (mother's prepregnancy weight, in kg) / (peso pré-gestacional da mãe, em kg)
+8.  mcig (mother's number of cigarettes smoked per day) (número de cigarros fumados pela mãe por dia)
+9.  fageyrs (father's age, in years) / (idade do pai, em anos )
+10. fheightcm (father's height, in cm) / (altura do pai, em cm)
+11. fedyrs (father's education, in years) / (educação do pai, em anos)
+12. fcig (father's number of cigarettes smoked per day) / (número de cigarros fumados por dia do pai)
+13. lowbwt (binary outcome, = 1 for $\le$ 2.75 kg, = 0 for \> 2.75 kg) / (desfecho binário, = 1 para $\le$ 2,75 kg, = 0 para \> 2,75 kg).
+
+Neste estudo, iremos realizar uma Análise Exploratória dos Dados, realizando análises descritivas e gráficas, buscando entender as relações entre as variáveis, analisando correlações e associações entre elas. Em seguida, iremos realizar uma Análise de Regressão Linear Simples. O foco desse estudo será analisar a relação das variáveis Idade da Mãe (mageyrs), Idade Gestacional (gestwks), Altura da Mãe (mheightcm) com a variável Peso Ao Nascer (bwtkg).
+
+## Carregando pacotes
+
+```{r}
+# Passo 1: Carregar os pacotes que serao usados
+
+if(!require(pacman)) install.packages("pacman")
+
+pacman::p_load(readxl, dplyr, ggplot2, car, rstatix, lmtest, ggpubr, skimr, corrplot, haven)
+
+```
+
+## Leitura dos Dados
+
+### Carregando os Dados
+
+```{r}
+#| message: false
+
+dados_all <- read_dta("chdsmetric.dta")
+glimpse(dados_all)        # Visualizacao de um resumo dos dados
+```
+
+### Variáveis de Interesse
+
+Nesta análise estatística, iremos focar nas variáveis gestwks, mageyrs, mheightcm e bwtkg.
+
+```{r}
+dados <- select(dados_all, gestwks, mageyrs, mheightcm, bwtkg)
+glimpse(dados)
+```
+
+### Visualizando os Dados
+
+```{r}
+knitr::kable(dados[1:20,])
+```
+
+# Análise Exploratória dos Dados
+
+Iremos realizar uma análise exploratória dos dados, buscando extrair informações e observar possíveis correlações entre as variáveis.
+
+## Resumo dos Dados
+
+```{r}
+skim(dados)
+```
+
+## Análise Descritiva das Variáveis
+
+Nesta seção, iremos analisar as variáveis de forma univariada, fazendo uso de testes de normalidade e gráficos do tipo histograma, boxplot e densidade.
+
+### Idade Gestacional (gestwks)
+
+Teste Normalidade Shapiro-Wilk
+
+```{r}
+shapiro.test(dados$gestwks)
+```
+
+Como o Valor p \< 0.05, logo podemos concluir que a variável Idade Gestacional não segue a distribuição normal.
+
+Gráficos:
+
+```{r}
+hist(dados$gestwks, main = "Histograma de Idade Gestacional", xlab = "Idade Gestacional (em semanas)")
+dados %>%
+  ggplot( aes(x=mageyrs)) +
+    geom_density(fill="#69b3a2", color="#e9ecef", alpha=0.8) +
+    ggtitle("Distribuição de Idade Gestacional") +
+    xlab("Idade Gestacional (em semanas)")
+boxplot(dados$gestwks,main = "Boxplot de Idade Gestacional")
+```
+
+### Altura da Mãe (mheightcm)
+
+Teste Normalidade Shapiro-Wilk
+
+```{r}
+shapiro.test(dados$mheightcm)
+```
+
+Como o Valor p \< 0.05, logo podemos concluir que a variável Altura da Mãe não segue a distribuição normal.
+
+Gráficos:
+
+```{r}
+hist(dados$mheightcm, main = "Histograma de Altura da Mãe", xlab = "Altura (em cm)")
+dados %>%
+  ggplot( aes(x=mheightcm)) +
+    geom_density(fill="#69b3a2", color="#e9ecef", alpha=0.8) +
+    ggtitle("Distribuição de Altura da Mãe") +
+    xlab("Altura (em cm)")
+boxplot(dados$mheightcm, main = "Boxplot de Altura da Mãe")
+```
+
+### Idade da Mãe (mageyrs)
+
+Teste Normalidade Shapiro-Wilk
+
+```{r}
+shapiro.test(dados$mageyrs)
+```
+
+Como o Valor p \< 0.05, logo podemos concluir que a variável Idade da Mãe não segue a distribuição normal.
+
+Gráficos:
+
+```{r}
+hist(dados$mageyrs, main = "Histograma de Idade da Mãe", xlab = "Idade (em anos)")
+dados %>%
+  ggplot( aes(x=mageyrs)) +
+    geom_density(fill="#69b3a2", color="#e9ecef", alpha=0.8) +
+    ggtitle("Distribuição de Idade da Mãe") +
+    xlab("Idade (em anos)")
+boxplot(dados$mageyrs, main = "Boxplot de Idade da Mãe")
+```
+
+### Peso ao Nascer (bwtkg)
+
+#### Teste Normalidade Shapiro-Wilk
+
+```{r}
+shapiro.test(dados$bwtkg)
+```
+
+Como o valor p \> 0.05, podemos concluir que a variável Peso ao Nascer segue a distribuição normal.
+
+##### Gráficos:
+
+```{r}
+hist(dados$bwtkg, main = "Histograma de Peso ao Nascer", xlab = "Peso (em kg)")
+dados %>%
+  ggplot( aes(x=bwtkg)) +
+    geom_density(fill="#69b3a2", color="#e9ecef", alpha=0.8) +
+    ggtitle("Distribuição de Peso ao Nascer") +
+    xlab("Peso (em kg)")
+boxplot(dados$bwtkg, main = "Boxplot de Peso ao Nascer")
+```
+
+### Observações Importantes
+
+Observando os gráficos de boxplot das variáveis, notamos a presença de outliers em todas as variáveis do conjunto de dados sendo estudado. Analisando os testes de normalidade feitos, nota-se que apenas a variável Peso ao Nascer (bwtkg) segue a distribuição normal. Com isso, optamos por utilizar também o Teste de Spearman para analisar correlações entre variáveis.
+
+## Analisando Correlações entre Variáveis
+
+Nesta seção iremos analisar as variáveis de forma bi-variada, buscando visualizar possíveis correlações entre as variáveis Idade da Mãe(mageyrs), Altura da Mãe(mheightcm) e Idade Gestacional(gestwks) com a variável Peso ao Nascer(bwtkg).
+
+### Idade Gestacional e Peso ao Nascer
+
+#### Visualizando Relações entre Variáveis
+
+```{r}
+plot(dados$gestwks, dados$bwtkg, xlab="Idade Gestacional", ylab="Peso ao Nascer")
+```
+
+#### Coeficiente de Correlação
+
+Estimativa do coeficiente de correlação (linear) entre variáveis numéricas.
+
+Coeficiente de Pearson:
+
+```{r}
+cor(dados$bwtkg, dados$gestwks)
+```
+
+Coeficiente de Spearman:
+
+```{r}
+cor(dados$bwtkg, dados$gestwks, method="spearman")
+```
+
+### Altura da Mãe e Peso ao Nascer
+
+#### Visualizando Relações entre Variáveis
+
+```{r}
+plot(dados$mheightcm, dados$bwtkg, xlab="Altura da Mãe", ylab="Peso ao Nascer")
+```
+
+#### Coeficiente de Correlação
+
+Estimativa do coeficiente de correlação (linear) entre variáveis numéricas.
+
+Coeficiente de Pearson:
+
+```{r}
+cor(dados$bwtkg, dados$mheightcm)
+```
+
+Coeficiente de Spearman:
+
+```{r}
+cor(dados$bwtkg, dados$mheightcm, method="spearman")
+```
+
+### Idade da Mãe e Peso ao Nascer
+
+#### Visualizando Relações entre Variáveis
+
+```{r}
+plot(dados$mageyrs, dados$bwtkg, xlab="Idade da Mãe", ylab="Peso ao Nascer")
+```
+
+#### Coeficiente de Correlação
+
+Estimativa do coeficiente de correlação (linear) entre variáveis numéricas.
+
+Coeficiente de Pearson:
+
+```{r}
+cor(dados$bwtkg, dados$mageyrs)
+```
+
+Coeficiente de Spearman:
+
+```{r}
+cor(dados$bwtkg, dados$mageyrs, method="spearman")
+```
+
+## Visualizando a Correlação das 4 Variáveis
+
+```{r}
+plot(dados)
+
+matrix.cor <- cor(dados, method="spearman")
+
+corrplot(matrix.cor, method="color", addCoef.col="black", type="upper", diag=FALSE)
+
+```
+
+# Análise Indutiva
+
+Analisando os resultados obtidos na seção anterior, podemos inferir que existe uma correlação moderada entre a Idade Gestacional e o Peso Ao Nascer, com coeficiente de Spearman de 0.40 e de Pearson de 0.42. Também podemos inferir que existe uma correlação fraca entre a Altura da Mãe e o Peso ao Nascer, com coeficiente de Pearson de 0.20 e Coeficiente de Spearman de 0.20. Nota-se que a correlação entre Idade da Mãe e Peso ao Nascer é extremamente fraca ou inexistente, com o Coeficiente de Spearman de 0.02 e Coeficiente de Pearson de 0.001. Com isso, iremos aplicar um teste de hipótese para observar a associação entre essas variáveis.
+
+## Peso Ao Nascer e Idade Gestacional
+
+```{r}
+cor.result.gestwks <- cor.test(dados$gestwks, dados$bwtkg)
+cor.result.gestwks
+```
+
+Aplicando um teste de hipótese para verificar a existência de associação entre as variáveis Idade Gestacional e Peso Ao Nascer, encontramos intervalo de confiança entre 0.36 e 0.49. Como este intervalo não contém a correlação nula (=0), podemos concluir com 95% de confiança que existe associação linear e positiva entre essas variáveis. Ou seja, quanto maior o Tempo de Gestação, maior será o Peso ao Nascer do recém-nascido.
+
+## Peso ao Nascer e Altura da Mãe
+
+```{r}
+cor.result.mheightcm <- cor.test(dados$mheightcm, dados$bwtkg)
+cor.result.mheightcm
+```
+
+Aplicando um teste de hipótese para verificar a existência de associação entre as variáveis Altura da Mãe e Peso Ao Nascer, encontramos intervalo de confiança entre 0.13 e 0.27. Como este intervalo não contém a correlação nula (=0), podemos concluir com 95% de confiança que existe associação linear e positiva entre essas variáveis. Ou seja, quanto maior a Altura da Mãe, maior será o Peso ao Nascer do recém-nascido.
+
+## Peso ao Nascer e Idade da Mãe
+
+```{r}
+cor.result.mageyrs <- cor.test(dados$mageyrs, dados$bwtkg)
+cor.result.mageyrs
+```
+
+Aplicando um teste de hipótese para verificar a existência de associação entre as variáveis Idade da Mãe e Peso Ao Nascer, encontramos intervalo de confiança entre -0.07 e 0.07. Como este intervalo contém a correlação nula (=0), podemos concluir com 95% de confiança que não existe associação entre essas variáveis.
+
+# Análise de Regressão Linear
+
+Nessa seção, iremos utilizar Modelos de Regressão Linear Simples para as variáveis [Idade Gestacional e Peso ao Nascer](#idade-gestacional-e-peso-ao-nascer-1), [Idade da Mãe e Peso ao Nascer](#idade-da-mãe-e-peso-ao-nascer-1) e [Altura da Mãe e Peso ao Nascer](#altura-da-mãe-e-peso-ao-nascer-1).
+
+## Idade Gestacional e Peso Ao Nascer {#idade-gestacional-e-peso-ao-nascer-1}
+
+### Análise do Modelo
+
+```{r}
+model.gestwks <- lm(bwtkg~gestwks, dados)
+summary(model.gestwks)
+```
+
+Dado que o valor p do F-Statistic suficientemente pequeno, rejeita-se a Hipótese Nula ($\beta = 0$). Admitindo a Hipótese Alternativa ($\beta \not= 0$), a Idade Gestacional exerce influência linear sobre o Peso ao Nascer.
+
+$$
+y = -1.1 + 0.11x
+$$
+
+### Verificação dos Pressupostos da Regressão Linear
+
+#### Análise Gráfica
+
+```{r}
+par(mfrow=c(2,2))
+plot(model.gestwks)
+```
+
+-   Analisando o Gráfico de Resíduos-Fitted, nota-se que a linha dos resíduos aproxima-se do eixo horizontal do gráfico, porém com um padrão similar a uma parábola, indicando que talvez existam relações não-lineares não explicadas pelo modelo.
+-   Analisando o Gráfico Q-Q Normal, verificamos que os resíduos se aproximam bastante da linha diagonal tracejada, sendo uma boa indicação para o modelo, que os resíduos seguem a distribuição normal.
+-   Analisando o Gráfico Scale-Location, verificamos que os resíduos não estão distribuídos igualmente ao longo de uma linha horizontal, formando padrões ao longo do gráfico, levando ao questionamento da Homocedasticidade.
+-   Analisando o Gráfico de Alavancagem, não há indicações de casos influenciais no estudo (outliers que possam influenciar na regressão linear), todos os casos aparentam estar dentro das linhas da Distância de Cook.
+
+#### Verificação por Testes de Hipótese
+
+##### Teste de Normalidade Shapiro-Wilk
+
+```{r}
+shapiro.test(model.gestwks$residuals)
+```
+
+Dado que o valor p não é suficientemente pequeno (0.28), admite-se a Hipótese Nula que os resíduos seguem a distribuição normal.
+
+##### Outliers nos Resíduos
+
+```{r}
+summary(rstandard(model.gestwks))
+```
+
+Espera-se que, seguindo a distribuição normal, os valores estariam entre -3 e 3. Porém os valores mínimos e máximo dos resíduos são -3.2 e 3.37, indicando a presença de possíveis outliers nos dados.
+
+##### Independência dos Resíduos com Estatística de Durbin-Watson
+
+```{r}
+durbinWatsonTest(model.gestwks)
+```
+
+Dado que a estatística de Durbin-Watson está entre 1 e 3 (2.18), que reforça uma ideia de Independência dos Resíduos. Em seguida, avaliando o valor p, temos que o valor p é suficientemente grande (0.77 \> 0.05), não se rejeita a hipótese nula, admitindo que há independência dos resíduos.
+
+##### Teste de Homocedasticidade Breusch-Pagan
+
+```{r}
+bptest(model.gestwks)
+```
+
+Dado que o valor p do Teste Breusch-Pagan é de 0.13, não se rejeita a hipótese nula. Logo, podemos concluir que o modelo é homocedástico.
+
+### Visualização Gráfica
+
+```{r}
+ggplot(data=dados, mapping = aes(gestwks, bwtkg)) +
+  geom_point() +
+  geom_smooth(method = "lm", col="red") +
+  stat_regline_equation() +
+  theme_classic()
+```
+
+## Altura da Mãe e Peso ao Nascer {#altura-da-mãe-e-peso-ao-nascer-1}
+
+### Análise do Modelo
+
+```{r}
+model.mheightcm <- lm(bwtkg~mheightcm, dados)
+summary(model.mheightcm)
+```
+
+Dado que o valor p do F-Statistic suficientemente pequeno, rejeita-se a Hipótese Nula ($\beta = 0$). Admitindo a Hipótese Alternativa ($\beta \not= 0$), a Altura da Mãe exerce influência linear sobre o Peso ao Nascer.
+
+$$
+y = 0.8 +0.016x
+$$
+
+### Verificação dos Pressupostos da Regressão Linear
+
+#### Análise Gráfica
+
+```{r}
+par(mfrow=c(2,2))
+plot(model.mheightcm)
+```
+
+-   Analisando o Gráfico de Resíduos-Fitted, nota-se que a linha dos resíduos aproxima-se de uma linha horizontal sem padrões que possam ser distinguidos, indicando que não há relações não-lineares das variáveis nos dados, e indicando uma relação linear entre as variáveis.
+-   Analisando o Gráfico Q-Q Normal, verificamos que os resíduos se aproximam bastante da linha diagonal tracejada, sendo uma boa indicação para o modelo, que os resíduos seguem a distribuição normal.
+-   Analisando o Gráfico Scale-Location, verificamos que os resíduos estão distribuídos pelo gráfico, formando padrões em linhas verticais, não distribuídos igualmente. Essa observação leva ao questionanamento da Homocedasticidade.
+-   Analisando o Gráfico de Alavancagem, não há indicações de casos influenciais no estudo (outliers que possam influenciar na regressão linear), todos os casos aparentam estar dentro das linhas da Distância de Cook.
+
+#### Verificação por Testes de Hipótese
+
+##### Teste de Normalidade Shapiro-Wilk
+
+```{r}
+shapiro.test(model.mheightcm$residuals)
+```
+
+Dado que o valor p não é suficientemente pequeno (0.20), admite-se a Hipótese Nula que os resíduos seguem a distribuição normal.
+
+##### Outliers nos Resíduos
+
+```{r}
+summary(rstandard(model.mheightcm))
+```
+
+Espera-se que, seguindo a distribuição normal, os valores estariam entre -3 e 3. Porém os valores mínimos e máximo dos resíduos são -3.9 e 3.75, indicando a presença de outliers nos dados.
+
+##### Independência dos Resíduos com Estatística de Durbin-Watson
+
+```{r}
+durbinWatsonTest(model.mheightcm)
+```
+
+Dado que a estatística de Durbin-Watson está entre 1 e 3 (2.03), que reforça uma ideia de Independência dos Resíduos. Em seguida, avaliando o valor p, temos que o valor p é suficientemente grande (0.68 \> 0.05), não se rejeita a hipótese nula, admitindo que há independência dos resíduos.
+
+#### Teste de Homocedasticidade Breusch-Pagan
+
+```{r}
+bptest(model.mheightcm)
+```
+
+Dado que o valor p do Teste Breusch-Pagan é de 0.64, consideravelmente maior que 0.05, logo, não se rejeita a hipótese nula e podemos concluir que o modelo é homocedástico.
+
+### Visualização Gráfica
+
+```{r}
+ggplot(data=dados, mapping = aes(mheightcm, bwtkg)) +
+  geom_point() +
+  geom_smooth(method = "lm", col="red") +
+  stat_regline_equation() +
+  theme_classic()
+```
+
+## Idade da Mãe e Peso ao Nascer {#idade-da-mãe-e-peso-ao-nascer-1}
+
+### Análise do Modelo
+
+```{r}
+model.mageyrs <- lm(bwtkg~mageyrs, dados)
+summary(model.mageyrs)
+```
+
+Dado que o valor p do F-Statistic não é suficientemente pequeno, admite-se a Hipótese Nula ($\beta = 0$), a Idade da Mãe não exerce influência linear sobre o Peso ao Nascer.
+
+$$
+y = 3.4 +8.7*10^{-5}x
+$$
+
+### Verificação dos Pressupostos da Regressão Linear
+
+#### Análise Gráfica
+
+```{r}
+par(mfrow=c(2,2))
+plot(model.mageyrs)
+```
+
+-   Analisando o Gráfico de Resíduos-Fitted, nota-se que a linha dos resíduos aproxima-se de uma linha horizontal sem padrões que possam ser distinguidos, indicando que não há relações não-lineares que possam ser percebidas, indicando uma relação linear entre as variáveis.
+-   Analisando o Gráfico Q-Q Normal, verificamos que os resíduos se aproximam bastante da linha diagonal tracejada, sendo uma boa indicação para o modelo que os resíduos seguem a distribuição normal.
+-   Analisando o Gráfico Scale-Location, verificamos que os resíduos estão distribuídos pelo gráfico, formando padrões em linhas verticais, não distribuídos igualmente. Essa observação leva ao questionanamento da Homocedasticidade.
+-   Analisando o Gráfico de Alavancagem, não há indicações de casos influenciais no estudo (outliers que possam influenciar na regressão linear), todos os casos aparentam estar dentro das linhas da Distância de Cook.
+
+#### Verificação por Testes de Hipótese
+
+##### Teste de Normalidade Shapiro-Wilk
+
+```{r}
+shapiro.test(model.mageyrs$residuals)
+```
+
+Dado que o valor p não é suficientemente pequeno (0.13), admite-se a Hipótese Nula que os resíduos seguem a distribuição normal.
+
+##### Outliers nos Resíduos
+
+```{r}
+summary(rstandard(model.mageyrs))
+```
+
+Espera-se que, seguindo a distribuição normal, os valores dos resíduos estariam entre -3 e 3. Porém os valores mínimos e máximo dos resíduos são -3.86 e 3.56, indicando existe a presença de outliers nos dados.
+
+##### Independência dos Resíduos com Estatística de Durbin-Watson
+
+```{r}
+durbinWatsonTest(model.mageyrs)
+```
+
+Dado que a estatística de Durbin-Watson está entre 1 e 3 (1.98), que reforça uma ideia de Independência dos Resíduos. Em seguida, avaliando o valor p, temos que o valor p é suficientemente grande (0.85 \> 0.05), logo, não se rejeita a hipótese nula, admitindo que existe independência dos resíduos.
+
+##### Teste de Homocedasticidade Breusch-Pagan
+
+```{r}
+bptest(model.mageyrs)
+```
+
+Dado que o valor p do Teste Breusch-Pagan é de 0.56, consideravelmente maior que 0.05, logo, não se rejeita a hipótese nula e podemos concluir que o modelo é homocedástico.
+
+### Visualização Gráfica
+
+```{r}
+ggplot(data=dados, mapping = aes(mageyrs, bwtkg)) +
+  geom_point() +
+  geom_smooth(method = "lm", col="red") +
+  stat_regline_equation() +
+  theme_classic()
+```
+
+# Conclusão
+
+Através dos Testes do Pressuposto realizados, podemos concluir que os modelos de regressão linear gerados atendem aos pressupostos da regressão linear, logo apresentam confiabilidade.
+
+Analisando os resultados obtidos pelos Modelos de Regressão Linear, Análise de Correlação e pelos gráficos desenvolvidos, podemos concluir que os fatores Idades Gestacional e Altura da Mãe possuem relação de associação linear positiva com a variável Peso Ao Nascer. Observando os coeficientes de correlação e os modelos de regressão linear, podemos observar que o fator Idade Gestacional possui uma influência maior sobre o Peso quando comparado ao fator Altura da Mãe. Também podemos concluir que o fator Idade da Mãe não possui influência linear sobre o Peso ao Nascer, e possui correlação extremamente fraca e neglível com essa variável.
+
+Resumindo os resultados obtidos, podemos derivar as seguintes conclusões desse estudo:
+
+-   Os fatores Idade Gestacional e Altura da Mãe possuem influência linear sobre o fator Peso ao Nascer da criança.
+-   O fator Idade Gestacional é o fator mais relevante para se prever a variável Peso ao Nascer, dentre os fatores analisados.
+-   O fator Idade da Mãe não é relevante para prever a variável Peso ao Nascer, por não possuir correlação significativa e não possuir influência linear.
+-   Os pressupostos do modelo de regressão linear são satisfeitas para todos os 3 modelos criados.
+
+## Realizando Previsões De Peso ao Nascer
+
+Para finalizar o estudo, utilizaremos os modelos de regressão para realizar previsões de Peso ao Nascer de uma criança a partir das variáveis de Idade Gestacional, Altura da Mãe e Idade da Mãe.
+
+### A partir na Idade Gestacional
+
+```{r}
+gestacaoX <- c(38, 43, 36, 39)
+df.gestacaoX <- data.frame("gestwks" = gestacaoX)
+previsoes.gestacao <- predict(model.gestwks, df.gestacaoX)
+
+resultados.gestacao <- cbind(gestacaoX, previsoes.gestacao)
+resultados.gestacao
+```
+
+### A partir da Altura da Mãe
+
+```{r}
+alturaX <- c(164, 180, 146, 172)
+df.alturaX <- data.frame("mheightcm" = alturaX)
+previsoes.altura <- predict(model.mheightcm, df.alturaX)
+
+resultados.altura <- cbind(alturaX, previsoes.altura)
+resultados.altura
+```
+
+### A partir da Idade da Mãe
+
+```{r}
+idadeX <- c(27, 37, 22, 54)
+df.idadeX <- data.frame("mageyrs" = idadeX)
+previsoes.idade <- predict(model.mageyrs, df.idadeX)
+
+resultados.idade <- cbind(idadeX, previsoes.idade)
+resultados.idade
+```

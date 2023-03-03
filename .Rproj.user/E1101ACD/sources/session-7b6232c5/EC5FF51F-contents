@@ -1,0 +1,84 @@
+---
+title: "Análise de Correlação e Regressão Linear Simples"
+format: 
+  html:
+    toc: true
+    number-depth: 3
+    number-sections: true
+    toc-title: Sumário
+    toc-location: body
+editor: visual
+author: 
+  - Anderson dos Santos Silva
+  - José Alves de Figueiredo Neto
+---
+
+# Introdução
+O Conjunto de Dados de Saude e Desenvolvimento da Criança foi projetado para avaliar fatores relacionados ao baixo peso ao nascer em crianças. O conjunto de dados do software Stata chdsmetric.dta contém as seguintes variáveis:
+
+\01. bwtkg (birth weight, in kg) / (peso ao nascer, em kg)
+\02. blengthcm (birth length, in cm) / (comprimento ao nascer, em cm)
+\03. bheadcircm (birth head circumference, in cm) / (perímetro cefálico de nascimento, em cm)
+\04. gestwks (gestational age, in weeks) / (idade gestacional, em semanas)
+\05. mageyrs (mother’s age, in years) / (idade da mãe , em anos)
+\06. mheightcm (mother’s height, in cm) / (altura da mãe, em cm)
+\07. mweightkg (mother’s prepregnancy weight, in kg) / (peso pré-gestacional da mãe, em kg)
+\08. mcig (mother’s number of cigarettes smoked per day) (número de cigarros fumados pela mãe por dia)
+\09. fageyrs (father’s age, in years) / (idade do pai, em anos )
+\10. fheightcm (father’s height, in cm) / (altura do pai, em cm)
+\11. fedyrs (father’s education, in years) / (educação do pai, em anos)
+\12. fcig (father’s number of cigarettes smoked per day) / (número de cigarros fumados por
+dia do pai)
+
+## Carregando pacotes
+
+```{r}
+# Passo 1: Carregar os pacotes que serao usados
+
+if(!require(pacman)) install.packages("pacman")
+library(pacman)
+library(haven)
+
+pacman::p_load(readxl, dplyr, ggplot2, car, rstatix, lmtest, ggpubr, skimr)
+
+```
+
+## Leitura dos Dados
+### Carregando os Dados
+```{r}
+#| message: false
+
+dados_all <- read_dta("chdsmetric.dta")
+glimpse(dados_all)        # Visualizacao de um resumo dos dados
+```
+### Variáveis de Interesse
+Nesta análise estatística, iremos focar nas variáveis gestwks, mageyrs, mheightcm e bwtkg.
+```{r}
+# Selecionando apenas as variaveis de interesse
+dados <- select(dados_all, gestwks, mageyrs, mheightcm, bwtkg)
+glimpse(dados)
+```
+### Visualizando os Dados
+```{r}
+knitr::kable(dados[1:15,])
+```
+# Análise Descritiva dos Dados
+## Resumo dos Dados
+```{r}
+skim(dados)
+```
+### Plot
+```{r}
+plot(dados)
+```
+### Pairs
+```{r}
+pairs(dados)
+```
+### Cor
+```{r}
+cor(dados)
+```
+# Análise de Regressão Linear Simples
+
+# Previsão

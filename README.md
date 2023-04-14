@@ -8,6 +8,10 @@ Foram realizadas Análise Exploratória dos Dados, Análise Descritiva e Indutiv
 
 O relatório foi desenvolvido em R, utilizando RMarkdown e Quarto.
 
+Relatorio disponível em:
+
+[HTML](relatorio.html)
+
 Bibliotecas Utilizadas:
  - readxl
  - dplyr
